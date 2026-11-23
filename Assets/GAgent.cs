@@ -25,15 +25,95 @@ public class GAgent : MonoBehaviour
     public GAction currentAction;
     SubGoal currentGoal;
 
-    void Start()
+    protected void Start()
     {
         GAction[] acts = GetComponents<GAction>();
         foreach (GAction a in acts)
             actions.Add(a);
     }
 
+    bool invoked = false;
+
+    void CompleteAction()
+    {
+        currentAction.running = false;
+        currentAction.PostPerform();
+        invoked = false;
+    }
+
     void LateUpdate()
     {
-        
+        if (currentAction != null && currentAction.running)
+        {
+            if (currentAction.agent.hasPath && currentAction.agent.remainingDistance < 1)
+            {
+                if (!invoked)
+                {
+                    Invoke("CompleteAction", currentAction.duration);
+                    invoked = true;
+                }
+            }
+
+            return;
+        }
+
+        if (actionQueue != null && actionQueue.Count > 0)
+        {
+            currentAction = actionQueue.Dequeue();
+            if (currentAction.PrePeform())
+            {
+                if (currentAction.target == null && currentAction.targetTag != "")
+                    currentAction.target = GameObject.FindWithTag(currentAction.targetTag);
+
+                if (currentAction.target != null)
+                {
+                    currentAction.running = true;
+                    currentAction.agent.SetDestination(currentAction.target.transform.position);
+                }
+                else
+                {
+                    actionQueue = null;
+                    planner = null;
+                    currentAction.running = false;
+                    currentAction = null;
+                }
+            }
+            else
+            {
+                actionQueue = null;
+                planner = null;
+                currentAction.running = false;
+                currentAction = null;
+            }
+
+            return;
+        }
+
+        if (actionQueue != null)
+        {
+            if (currentGoal.remove)
+                goals.Remove(currentGoal);
+            actionQueue = null;
+            planner = null;
+            currentAction = null;
+            return;
+        }
+
+        if (planner == null)
+        {
+            planner = new GPlanner();
+            
+            var sortedGoals = from entry in goals orderby entry.Value descending select entry;
+
+            foreach (KeyValuePair<SubGoal, int> sg in sortedGoals)
+            {
+                actionQueue = planner.Plan(actions, sg.Key.sgoals, null);
+                if (actionQueue != null)
+                {
+                    currentGoal = sg.Key;
+                    break;
+                }
+            }
+        }
     }
 }

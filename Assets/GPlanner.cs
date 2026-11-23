@@ -63,7 +63,7 @@ public class GPlanner
         }
 
         Queue<GAction> queue = new Queue<GAction>();
-        foreach (GAction a in queue)
+        foreach (GAction a in result)
         {
             queue.Enqueue(a);
         }
@@ -90,6 +90,8 @@ public class GPlanner
                 {
                     if (!currentState.ContainsKey(eff.Key))
                         currentState.Add(eff.Key, eff.Value);
+                    else
+                        currentState[eff.Key] = eff.Value;
                 }
 
                 Node node = new Node(parent, parent.cost + action.cost, currentState, action);
@@ -125,7 +127,7 @@ public class GPlanner
         List<GAction> subset = new List<GAction>();
         foreach (GAction a in actions)
         {
-            if (a.Equals(removeMe))
+            if (!a.Equals(removeMe))
                 subset.Add(a);
         }
         return subset;
