@@ -42,6 +42,11 @@ public abstract class GAction : MonoBehaviour
             }
     }
 
+    public bool IsAchievable()
+    {
+        return true;
+    }
+
     public bool IsAchievableGiven(Dictionary<string, int> conditions)
     {
         foreach (KeyValuePair<string, int> p in preconditions)

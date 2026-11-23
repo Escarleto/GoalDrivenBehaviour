@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -53,7 +54,7 @@ public class WorldStates : MonoBehaviour
             states.Add(key, value);
     }
 
-    public Dictionary<string, int> GetSates()
+    public Dictionary<string, int> GetStates()
     {
         return states;
     }
