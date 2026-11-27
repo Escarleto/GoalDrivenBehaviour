@@ -27,7 +27,11 @@ public class GetPatient : GAction
     {
         GWorld.Instance.GetWorld().ModifyState("Waiting", -1);
         if (target)
-            target.GetComponent<GAgent>().inventory.AddItem(resource);
+        {
+            GAgent patient = target.GetComponent<GAgent>();
+            patient.inventory.AddItem(resource);
+            patient.beliefs.ModifyState("hasCubicle", 1);
+        }
         return true;
     }
 }

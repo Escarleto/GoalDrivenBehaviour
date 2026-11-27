@@ -600,6 +600,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 742992260}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &664735704 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2618188073631541129, guid: 51e437be22296b340954bf6591a60065, type: 3}
+  m_PrefabInstance: {fileID: 988112176}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &664735709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 664735704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7f792a91d54a40daa884158fed659ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: GoToCubicle
+  cost: 1
+  target: {fileID: 0}
+  targetTag: 
+  duration: 0
+  preConditions:
+  - key: patientPickUp
+    value: 0
+  afterEffects:
+  - key: treatPatient
+    value: 0
+  agent: {fileID: 0}
+  running: 1
 --- !u!1 &669346817
 GameObject:
   m_ObjectHideFlags: 0
@@ -1567,6 +1597,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7082106590050935449, guid: 51e437be22296b340954bf6591a60065, type: 3}
+      propertyPath: afterEffects.Array.data[0].key
+      value: patientPickUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7082106590050935449, guid: 51e437be22296b340954bf6591a60065, type: 3}
       propertyPath: preConditions.Array.data[0].key
       value: Waiting
       objectReference: {fileID: 0}
@@ -1581,7 +1615,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2618188073631541129, guid: 51e437be22296b340954bf6591a60065, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 664735709}
   m_SourcePrefab: {fileID: 100100000, guid: 51e437be22296b340954bf6591a60065, type: 3}
 --- !u!1 &1000317771
 GameObject:
@@ -3877,8 +3914,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 121.2, y: -386.1}
-  m_SizeDelta: {x: 242.5, y: 772.1}
+  m_AnchoredPosition: {x: 247.3635, y: -386.1}
+  m_SizeDelta: {x: 494.827, y: 772.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1592830989
 MonoBehaviour:

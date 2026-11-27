@@ -3058,8 +3058,12 @@ MonoBehaviour:
   target: {fileID: 0}
   targetTag: 
   duration: 0
-  preConditions: []
-  afterEffects: []
+  preConditions:
+  - key: hasCubicle
+    value: 1
+  afterEffects:
+  - key: isTreated
+    value: 1
   agent: {fileID: 0}
   running: 0
 --- !u!114 &9117326479299560751
