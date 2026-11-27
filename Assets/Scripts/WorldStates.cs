@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 [System.Serializable]
 public class WorldState
@@ -9,7 +8,7 @@ public class WorldState
     public int value;
 }
 
-public class WorldStates : MonoBehaviour
+public class WorldStates
 {
     public Dictionary<string, int> states;
     public int Version { get; private set; }

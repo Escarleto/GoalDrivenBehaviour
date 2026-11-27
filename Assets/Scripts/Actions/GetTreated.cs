@@ -1,0 +1,21 @@
+using UnityEngine;
+
+public class GetTreated : GAction
+{
+    GameObject resource;
+    public override bool PrePeform()
+    {
+        target = inventory.FindItemWithTag("Cubicle");
+        if (target == null)
+            return false;
+    
+        return true;
+    }
+
+    public override bool PostPerform()
+    {
+        GWorld.Instance.GetWorld().ModifyState("Treated", 1);
+        inventory.RemoveItem(target);
+        return true;
+    }
+}
