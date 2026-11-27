@@ -24,6 +24,7 @@ public class GAgent : MonoBehaviour
     Queue<GAction> actionQueue;
     public GAction currentAction;
     SubGoal currentGoal;
+    int lastPlanWorldVersion = -1;
 
     protected void Start()
     {
@@ -100,9 +101,11 @@ public class GAgent : MonoBehaviour
             return;
         }
 
-        if (planner == null)
+        WorldStates world = GWorld.Instance.GetWorld();
+        if (planner == null || world.Version != lastPlanWorldVersion)
         {
             planner = new GPlanner();
+            lastPlanWorldVersion = world.Version;
             
             var sortedGoals = from entry in goals orderby entry.Value descending select entry;
 

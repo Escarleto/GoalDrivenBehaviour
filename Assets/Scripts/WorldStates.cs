@@ -12,6 +12,7 @@ public class WorldState
 public class WorldStates : MonoBehaviour
 {
     public Dictionary<string, int> states;
+    public int Version { get; private set; }
 
     public WorldStates()
     {
@@ -35,15 +36,23 @@ public class WorldStates : MonoBehaviour
             states[key] += value;
             if (states[key] <= 0)
                 RemoveState(key);
+            else
+                Version++;
         }
         else
+        {
             states.Add(key, value);
+            Version++;
+        }
     }
 
     public void RemoveState(string key)
     {
         if (states.ContainsKey(key))
+        {
             states.Remove(key);
+            Version++;
+        }
     }
     
     public void SetState(string key, int value)
@@ -52,6 +61,7 @@ public class WorldStates : MonoBehaviour
             states[key] = value;
         else
             states.Add(key, value);
+        Version++;
     }
 
     public Dictionary<string, int> GetStates()
