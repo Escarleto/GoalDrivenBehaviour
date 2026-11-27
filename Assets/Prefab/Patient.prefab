@@ -2903,12 +2903,13 @@ GameObject:
   m_Component:
   - component: {fileID: 7880970886039044016}
   - component: {fileID: 4489560428381803254}
-  - component: {fileID: 5193732626252787019}
-  - component: {fileID: 1755468840614613699}
-  - component: {fileID: 4980604358853839259}
-  - component: {fileID: 6157442467766599402}
-  - component: {fileID: 7773186245609809947}
+  - component: {fileID: 5310936585267386731}
+  - component: {fileID: 567351930955318678}
+  - component: {fileID: 7530707684656707560}
+  - component: {fileID: 1836768431142170724}
+  - component: {fileID: 4867666761267367653}
   - component: {fileID: 9117326479299560751}
+  - component: {fileID: 1543915489864322347}
   m_Layer: 0
   m_Name: Patient
   m_TagString: Untagged
@@ -2954,7 +2955,7 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &5193732626252787019
+--- !u!114 &5310936585267386731
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2963,12 +2964,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7881807149238628900}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f87629b4af63e22797d77cd6c418171, type: 3}
+  m_Script: {fileID: 11500000, guid: 875d899dd92fbbe4892f7049a424de73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   actions: []
-  currentAction: {fileID: 1755468840614613699}
---- !u!114 &1755468840614613699
+  currentAction: {fileID: 0}
+--- !u!114 &567351930955318678
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2977,7 +2978,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7881807149238628900}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8663fbeb3aa41a2b6990976ec5002d97, type: 3}
+  m_Script: {fileID: 11500000, guid: cb347d2e5b08ee343b7cf277ba2c116a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   actionName: GoToHospital
@@ -2987,11 +2988,11 @@ MonoBehaviour:
   duration: 0
   preConditions: []
   afterEffects:
-  - key: hasArrived
+  - key: inHospital
     value: 0
   agent: {fileID: 4489560428381803254}
   running: 0
---- !u!114 &4980604358853839259
+--- !u!114 &7530707684656707560
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3000,23 +3001,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 7881807149238628900}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9eff4dbde9748de997b1aa06ee01cc7, type: 3}
+  m_Script: {fileID: 11500000, guid: 00a4a83ea6fb11d4e90c78cfe88157a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actionName: GoToRegister
+  actionName: Register
   cost: 1
   target: {fileID: 0}
   targetTag: Reception
   duration: 5
   preConditions:
-  - key: hasArrived
+  - key: inHospital
     value: 0
   afterEffects:
-  - key: hasRegistred
+  - key: isRegistred
     value: 0
   agent: {fileID: 0}
   running: 0
---- !u!114 &6157442467766599402
+--- !u!114 &1836768431142170724
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3025,7 +3026,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7881807149238628900}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26aa5f9fdfd49d15ca7df16b930c9a39, type: 3}
+  m_Script: {fileID: 11500000, guid: 4d74ca045ed81a64e80d76044fca4102, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   actionName: GoToWaitingRoom
@@ -3034,14 +3035,14 @@ MonoBehaviour:
   targetTag: WaitingArea
   duration: 0
   preConditions:
-  - key: hasRegistred
+  - key: isRegistred
     value: 0
   afterEffects:
   - key: isWaiting
     value: 0
   agent: {fileID: 0}
   running: 0
---- !u!114 &7773186245609809947
+--- !u!114 &4867666761267367653
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3050,20 +3051,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 7881807149238628900}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb6173dfd0ee102cf96f21cb125cb7b8, type: 3}
+  m_Script: {fileID: 11500000, guid: 6d6851412890876dbb38ab80bf849a2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actionName: GetTreated
+  actionName: GoHome
   cost: 1
   target: {fileID: 0}
-  targetTag: 
+  targetTag: Home
   duration: 0
   preConditions:
-  - key: hasCubicle
-    value: 1
-  afterEffects:
   - key: isTreated
-    value: 1
+    value: 0
+  afterEffects:
+  - key: isHome
+    value: 0
   agent: {fileID: 0}
   running: 0
 --- !u!114 &9117326479299560751
@@ -3078,7 +3079,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36621d388105c6e42b1945c724799ad3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thisAgent: {fileID: 5193732626252787019}
+  thisAgent: {fileID: 5310936585267386731}
+--- !u!114 &1543915489864322347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7881807149238628900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bc7c3c9f85b90646aaa03cb659fc5b4, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  actionName: GetTreated
+  cost: 1
+  target: {fileID: 0}
+  targetTag:
+  duration: 0
+  preConditions: []
+  afterEffects:
+  - key: isTreated
+    value: 1
+  agent: {fileID: 0}
+  running: 0
 --- !u!1 &7927236269272520591
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,13 +2,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public abstract class GAction : MonoBehaviour
-{
+public abstract class GAction : MonoBehaviour {
+
     public string actionName = "Action";
-    public float cost = 1f;
+    public float cost = 1.0f;
     public GameObject target;
     public string targetTag;
-    public float duration = 0;
+    public float duration = 0.0f;
     public WorldState[] preConditions;
     public WorldState[] afterEffects;
     public NavMeshAgent agent;
@@ -23,46 +23,53 @@ public abstract class GAction : MonoBehaviour
 
     public bool running = false;
 
-    public GAction()
-    {
+    public GAction() {
+
         preconditions = new Dictionary<string, int>();
         effects = new Dictionary<string, int>();
     }
 
-    public void Awake()
-    {
-        agent = gameObject.GetComponent<NavMeshAgent>();
+    public void Awake() {
 
-        if (preConditions != null)
-            foreach (WorldState w in preConditions)
-            {
+        agent = this.gameObject.GetComponent<NavMeshAgent>();
+
+        if (preConditions != null) {
+
+            foreach (WorldState w in preConditions) {
+
                 preconditions.Add(w.key, w.value);
             }
-        if (afterEffects != null)
-            foreach (WorldState w in afterEffects)
-            {
+        }
+
+        if (afterEffects != null) {
+
+            foreach (WorldState w in afterEffects) {
+
                 effects.Add(w.key, w.value);
             }
-        
-        inventory = GetComponent<GAgent>().inventory;
-        beliefs = GetComponent<GAgent>().beliefs;
+        }
+
+        inventory = this.GetComponent<GAgent>().inventory;
+        beliefs = this.GetComponent <GAgent>().beliefs;
     }
 
-    public bool IsAchievable()
-    {
+    public virtual bool IsAchievable() {
+
         return true;
     }
 
-    public bool IsAchievableGiven(Dictionary<string, int> conditions)
-    {
-        foreach (KeyValuePair<string, int> p in preconditions)
-        {
-            if (!conditions.ContainsKey(p.Key))
+    public bool IsAchievableGiven(Dictionary<string, int> conditions) {
+
+        foreach (KeyValuePair<string, int> p in preconditions) {
+
+            if (!conditions.ContainsKey(p.Key)) {
+
                 return false;
+            }
         }
         return true;
     }
 
-    public abstract bool PrePeform();
+    public abstract bool PrePerform();
     public abstract bool PostPerform();
 }

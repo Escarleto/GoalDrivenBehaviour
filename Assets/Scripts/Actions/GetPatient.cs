@@ -3,7 +3,7 @@ using UnityEngine;
 public class GetPatient : GAction
 {
     GameObject resource;
-    public override bool PrePeform()
+    public override bool PrePerform()
     {
         target = GWorld.Instance.RemovePatient();
         if (target == null)
@@ -19,19 +19,15 @@ public class GetPatient : GAction
             return false;
         }
 
+        GWorld.Instance.GetWorld().ModifyState("FreeCubicle", -1);
         GWorld.Instance.GetWorld().ModifyState("Waiting", -1);
         return true;
     }
 
     public override bool PostPerform()
     {
-        GWorld.Instance.GetWorld().ModifyState("Waiting", -1);
         if (target)
-        {
-            GAgent patient = target.GetComponent<GAgent>();
-            patient.inventory.AddItem(resource);
-            patient.beliefs.ModifyState("hasCubicle", 1);
-        }
+            target.GetComponent<GAgent>().inventory.AddItem(resource);
         return true;
     }
 }

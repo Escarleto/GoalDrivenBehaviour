@@ -1080,8 +1080,9 @@ GameObject:
   m_Component:
   - component: {fileID: 177407082141715887}
   - component: {fileID: 3639279757715636068}
-  - component: {fileID: 8538298875335455901}
-  - component: {fileID: 7082106590050935449}
+  - component: {fileID: 8059315895999047050}
+  - component: {fileID: 4961737246562458278}
+  - component: {fileID: 2668186011219912366}
   m_Layer: 0
   m_Name: Nurse
   m_TagString: Untagged
@@ -1127,7 +1128,7 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &8538298875335455901
+--- !u!114 &8059315895999047050
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1136,12 +1137,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2618188073631541129}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9841aaf4040e18bc950b3c0e7716a0f, type: 3}
+  m_Script: {fileID: 11500000, guid: 6f4544ce0f96aa9488fa3c95fbdd1b48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   actions: []
-  currentAction: {fileID: 7082106590050935449}
---- !u!114 &7082106590050935449
+  currentAction: {fileID: 0}
+--- !u!114 &4961737246562458278
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1158,14 +1159,36 @@ MonoBehaviour:
   target: {fileID: 0}
   targetTag: 
   duration: 0
+  preConditions: []
+  afterEffects:
+  - key: patientPickUp
+    value: 1
+  agent: {fileID: 0}
+  running: 0
+--- !u!114 &2668186011219912366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2618188073631541129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7f792a91d54a40daa884158fed659ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: GoToCubicle
+  cost: 1
+  target: {fileID: 0}
+  targetTag: 
+  duration: 0
   preConditions:
-  - key: Waiting
+  - key: patientPickUp
     value: 0
   afterEffects:
   - key: treatPatient
     value: 0
-  agent: {fileID: 3639279757715636068}
-  agentBeliefs: {fileID: 0}
+  agent: {fileID: 0}
   running: 0
 --- !u!1 &2629889911763255196
 GameObject:

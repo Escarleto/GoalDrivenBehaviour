@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class GoToRegister : GAction
 {
-    public override bool PrePeform()
+    public override bool PrePerform()
     {
         return true;
     }
